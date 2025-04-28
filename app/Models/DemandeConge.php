@@ -19,7 +19,7 @@ class DemandeConge extends Model
     // Relation avec l'utilisateur demandeur
     public function demandeur()
     {
-        return $this->belongsTo(User::class, 'idDemandeur');
+        return $this->belongsTo(PUtilisateur::class, 'idDemandeur');
     }
 
     // Relation avec l'état d'approbation
@@ -39,6 +39,6 @@ public function niveauApprobation()
 
 public function approbateur()
 {
-    return $this->belongsTo(User::class, 'idApprobateur');
+    return $this->belongsTo(PUtilisateur::class, 'idApprobateur');
 }
 }

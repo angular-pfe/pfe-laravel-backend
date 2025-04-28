@@ -19,7 +19,7 @@ return new class extends Migration
                   $table->text('note');
                   $table->dateTime('dateSoumission')->useCurrent();
                   $table->foreignId('idNiveauApprobation')->constrained('L_NiveauApprobation');
-                  $table->foreignId('idEtatNiveauApprobation')->constrained('L_NiveauApprobation');
+                  $table->foreignId('idEtatNiveauApprobation')->constrained('E_EtatNiveauApprobation');
                   $table->foreignId('idApprobateur')->nullable()->constrained('p_utilisateur')->onDelete('set null');
 
                   $table->timestamps();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('L_NiveauApprobation')) {
             Schema::create('L_NiveauApprobation', function (Blueprint $table) {
-            $table->id()->nullable();
+            $table->id();
             $table->foreignId('idApprobation')->constrained('P_Approbation');
             $table->string('libelle', 50);
             $table->string('couleur', 7); 

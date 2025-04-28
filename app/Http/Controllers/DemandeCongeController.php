@@ -35,7 +35,6 @@ public function store(Request $request)
             'message' => 'Impossible de récupérer les niveaux ou états d\'approbation.'
         ], 500);
     }
-
     $demande = DemandeConge::create([
         'idDemandeur' => auth()->id(), // Ligne 27
         'dateDebut' => $request->dateDebut,
@@ -52,22 +51,22 @@ public function store(Request $request)
 
 public function index()
 {
+
     try {
         $demandes = DemandeConge::query()
-            ->with([
-                'demandeur:id,name,email',
-                'etatNiveauApprobation:id,libelle,couleur'
-            ])
-            ->latest('dateSoumission')
-            ->paginate(request('per_page', 10));
-
+        ->with([
+            'demandeur:id,mail,nomPrenom',
+          //  'etatNiveauApprobation:id,libelle,couleur'
+        ])
+        ->latest('dateSoumission')
+        ->paginate(request('per_page', 10));
         return response()->json([
             'status' => 'success',
             'data' => $demandes->through(fn($item) => [
                 'id' => $item->id,
-                'dates' => $item->dateDebut->format('d/m/Y').' - '.$item->dateFin->format('d/m/Y'),
-                'statut' => $item->etatNiveauApprobation->libelle,
-                'demandeur' => $item->demandeur->name
+                'dates' => Carbon::parse($item->dateDebut)->format('d/m/Y') . ' - ' . Carbon::parse($item->dateFin)->format('d/m/Y'),
+                // 'statut' => $item->etatNiveauApprobation->libelle,
+                'demandeur' => $item->demandeur->nomPrenom
             ])
         ], 200);
 
