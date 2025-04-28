@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('E_EtatNiveauApprobation', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('idNiveauApprobation');
-            $table->foreign('idNiveauApprobation')->references('id')->on('L_NiveauApprobation');
-            $table->string('libelle', 50);
-            $table->string('couleur', 7); 
+            $table->id();
+           
+            $table->foreignId('idNiveauApprobation')->constrained('L_NiveauApprobation')->nullable();
+
+            $table->string('libelle', 50)->unique();
+            $table->string('couleur', 7)->default('#000000'); 
             $table->boolean('isValidation')->default(false);
             $table->integer('passageNiveau')->default(1);
             $table->boolean('isDefault')->default(false);

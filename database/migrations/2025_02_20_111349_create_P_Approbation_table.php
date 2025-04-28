@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('P_Approbation', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('libelle',25);
             $table->boolean('isDefault')->default(false);
             $table->timestamps();

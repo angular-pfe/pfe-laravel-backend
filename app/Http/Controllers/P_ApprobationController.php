@@ -57,5 +57,6 @@ class P_ApprobationController extends Controller
             'message' => 'Approbation deleted successfully.'
         ], 200);   
      }
+    
 }
 

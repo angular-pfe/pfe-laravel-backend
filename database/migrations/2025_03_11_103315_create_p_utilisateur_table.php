@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('p_utilisateur', function (Blueprint $table) {
-            $table->id()->primary;
+            $table->id();
             $table->string('login')->unique();
             $table->string('username');
             $table->string('psw');// Mot de passe chiffré

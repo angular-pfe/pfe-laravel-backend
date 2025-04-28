@@ -17,7 +17,7 @@ class E_EtatNiveauApprobationController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'idNiveauApprobation' => 'required|uuid',
+            'idNiveauApprobation' => 'required|int',
             'libelle' => 'required|string',
             'couleur' => 'required|string',
             'isValidation' => 'boolean',
@@ -25,7 +25,7 @@ class E_EtatNiveauApprobationController extends Controller
             'isDefault' => 'boolean',
         ]);
 
-        $data['id'] = (string) \Illuminate\Support\Str::uuid();
+        
         $etats=E_EtatNiveauApprobation::create($data);
         return response()->json([
             'status' => 'success',
@@ -37,7 +37,7 @@ class E_EtatNiveauApprobationController extends Controller
         $etats = E_EtatNiveauApprobation::findOrFail($id);
 
         $data = $request->validate([
-            'idNiveauApprobation' => 'required|uuid',
+            'idNiveauApprobation' => 'required|int',
             'libelle' => 'string',
             'couleur' => 'string',
             'isValidation' => 'boolean',

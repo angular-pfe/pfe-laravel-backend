@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class E_EtatNiveauApprobation extends Model
 {
     protected $table = 'E_EtatNiveauApprobation';
-    protected $fillable=['id','idNiveauApprobation','libelle','couleur','isValidation','passageNiveau','isDefault'];
-    public $incrementing=false;
-    public $keyType='string';
+    protected $fillable=['idNiveauApprobation','libelle','couleur','isValidation','passageNiveau','isDefault'];
+    public $incrementing=true;
+    public $keyType='int';
 
     public function niveauApprobation()
     {

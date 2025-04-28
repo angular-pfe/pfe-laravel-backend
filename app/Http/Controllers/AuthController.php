@@ -21,24 +21,23 @@ class AuthController extends Controller
             'mail' => 'required|string|email|unique:p_utilisateur,mail',
             'soldeCongeInitial' => 'required|integer',
             'role' => 'required|string'
+            
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-
-        $user = PUtilisateur::create([
-            'id' => \Illuminate\Support\Str::uuid(),
+            
+            $user = PUtilisateur::create([
             'login' => $request->login,
             'username' => $request->username,
-            'psw' => Hash::make($request->psw),
+            'psw' => Hash::make(trim($request->psw)),
             'nomPrenom' => $request->nomPrenom,
             'tel' => $request->tel,
             'mail' => $request->mail,
             'soldeCongeInitial' => $request->soldeCongeInitial,
             'role' => $request->role
         ]);
-
         $token = $user->createToken('AuthToken')->accessToken;
 
         return response()->json(['user' => $user, 'access_token' => $token], 201);
@@ -54,8 +53,7 @@ class AuthController extends Controller
         ]);
 
         $user = PUtilisateur::where('login', $request->login)->first();
-
-        if (!$user || !Hash::check($request->psw, $user->psw)) {
+        if (!$user || !Hash::check(trim($request->psw), $user->psw)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 

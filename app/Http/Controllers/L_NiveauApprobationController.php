@@ -18,14 +18,13 @@ class L_NiveauApprobationController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'idApprobation' => 'required|uuid',
+            'idApprobation' => 'required|int',
             'libelle' => 'required|string',
             'couleur' => 'required|string',
             'isInitialNode' => 'boolean',
             'isFinalNode' => 'boolean',
         ]);
 
-        $data['id'] = (string) \Illuminate\Support\Str::uuid();
 
         $niveaux=L_NiveauApprobation::create($data);
         return response()->json([

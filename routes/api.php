@@ -10,6 +10,10 @@ use App\Http\Controllers\L_NiveauApprobationController;
 use App\Http\Controllers\E_EtatNiveauApprobationController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DemandeCongeController;
+
+
+
 
 
 
@@ -17,7 +21,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register']);
 
 
-Route::middleware('auth:api')->group(function (){
+    Route::middleware('auth:api')->group(function (){
+    
 
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/approbations/store',[ P_ApprobationController::class,'store']);
@@ -36,6 +41,9 @@ Route::middleware('auth:api')->group(function (){
     Route::get('/utilisateurs/index', [UtilisateurController::class,'index']);
     Route::put('/utilisateurs/update/{id}', [UtilisateurController::class,'update']);
     Route::delete('/utilisateurs/destroy/{id}', [UtilisateurController::class,'destroy']);
-
+    Route::post('/demandes-conge/store', [DemandeCongeController::class, 'store']);
+    Route::get('/demandes-conge/index', [DemandeCongeController::class, 'index']);
+    Route::put('/demandes-conge/update/{id}', [DemandeCongeController::class, 'update']);
+    Route::delete('/demandes-conge/destroy/{id}', [DemandeCongeController::class, 'destroy']);
 });
 

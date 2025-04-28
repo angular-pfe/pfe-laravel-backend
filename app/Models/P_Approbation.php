@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class p_Approbation extends Model
 {
     protected $table = 'P_Approbation';
-    protected $fillable = ['id','libelle','isDefault'];
-    public $incrementing=false;
-    public $keyType='string';
+    protected $fillable = ['libelle','isDefault'];
+    public $incrementing=true;
+    public $keyType='int';
 
 
     public function niveauxApprobation()
